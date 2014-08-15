@@ -5,7 +5,8 @@ int g_winW = 1000;
 int g_winH = 700;
 float number = 0.0;
 char randChar = 'B';
-
+int countDown = 9;
+char[] countDown2;
 void setup() {
   size(g_winW, g_winH, P3D);
   charList.add('F');
@@ -127,6 +128,8 @@ void draw(){
   textSize(22);
   fill(0, 102, 153, 204);
   text(stringList.get((int)number), 20, 50, g_winW-50, g_winH);
+  textSize(40);
+  text(String.valueOf(countDown), 800, 200, g_winW-50, g_winH);
 }
 
 void keyPressed(){
@@ -140,6 +143,9 @@ void newFact(){
     number = random(0, stringList.size());
     text(stringList.get((int)number), 10, 10, g_winW, g_winH);
   }
+  countDown--;
+  textSize(40);
+  text(String.valueOf(countDown), 800, 200, g_winW-50, g_winH);
   newRandChar();
 }
 
