@@ -5,6 +5,8 @@ public class Particle {
   float g;
   float b;
   int elSize;
+  int lifeTime = 10;
+  
   public Particle(float x, float y) {
     position = new PVector(random(x,x+140), 89);
     pposition = position;
@@ -35,5 +37,16 @@ public class Particle {
     speed.y += .00005;
     speed.x += .00001;
     position.add(speed);
+  }
+  
+   public void live(){
+    lifeTime--;
+  }
+  
+  public boolean isAlive(){
+    if (lifeTime > 0){
+      return true;
+    }
+    return false;
   }
 }

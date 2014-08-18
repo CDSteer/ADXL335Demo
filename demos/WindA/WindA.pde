@@ -51,15 +51,7 @@ void setup() {
 void draw(){
   background(0);
   blur(50);
-    
-  for (int i=0 ; i< particle.size() ; i++) {
-    gapX = int(random(1, g_winW));
-    gapY = int(random(1, g_winH));
-    Particle particleT = (Particle)particle.get(i);
-    particleT.calculate((gapX), (gapY));
-    particleT.draw();
-  }
-
+  
   if (xAccel < caliX1 && xAccel < caliX2){
     x = x - 5;
     particle.add(new Particle(x,y));
@@ -75,10 +67,26 @@ void draw(){
     y--;
     particle.add(new Particle(x,y));
   } 
-  
-  if (xAccel == caliX1 || xAccel == caliX2 && yAccel == caliY1 || yAccel == caliY2){
-    particle.clear();
+    
+  for (int i=0 ; i< particle.size() ; i++) {
+    gapX = int(random(1, g_winW));
+    gapY = int(random(1, g_winH));
+    Particle particleT = (Particle)particle.get(i);
+    particleT.calculate((gapX), (gapY));
+    particleT.draw();
   }
+  
+  for (int i=0 ; i< particle.size() ; i++) {
+    Particle particleT = (Particle)particle.get(i);
+    particleT.live();
+    if (particleT.isAlive() == false){
+      particle.remove(i);
+    }
+  }
+  
+//  if (xAccel == caliX1 || xAccel == caliX2 && yAccel == caliY1 || yAccel == caliY2){
+//    particle.clear();
+//  }
   
  // We need to read in all the avilable data so graphing doesn't lag behind
   while (g_serial.available() >= 2*6+2) {

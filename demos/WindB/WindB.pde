@@ -4,6 +4,8 @@ import processing.opengl.*;
 import java.util.ArrayList;
 import java.util.List;
 
+int delay;
+
 // Globals
 int g_winW             = 1000;   // Window Width
 int g_winH             = 700;   // Window Height
@@ -41,10 +43,24 @@ void draw(){
     particleT.calculate((gapX), (gapY));
     particleT.draw();
   }
-  System.out.println(mouseX +", "+ mouseY);
-  if (mouseX == pmouseX && mouseY == pmouseY){
-    particle.clear();
+  
+  for (int i=0 ; i< particle.size() ; i++) {
+    Particle particleT = (Particle)particle.get(i);
+    particleT.live();
+    if (particleT.isAlive() == false){
+      particle.remove(i);
+    }
   }
+  
+  System.out.println(mouseX +", "+ mouseY);
+  delay++;
+  
+//  if (delay == 50){
+//    if (mouseX == pmouseX && mouseY == pmouseY){
+//      particle.clear();
+//    }
+//    delay = 0;
+//  }
 }
 
 

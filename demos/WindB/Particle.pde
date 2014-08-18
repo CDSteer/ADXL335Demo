@@ -4,7 +4,9 @@ public class Particle {
   float r;
   float g;
   float b;
-
+  int elSize;
+  int lifeTime = 50;
+  
   public Particle(float x, float y) {
     position = new PVector(random(x,x+140), 89);
     pposition = position;
@@ -17,8 +19,9 @@ public class Particle {
     r = random(1,255);
     g = random(1,255);
     b = random(1,255);
+    elSize = (int)random(10,70);
     fill(r,g,b);
-    ellipse(position.x,position.y,20,20);
+    ellipse(position.x,position.y,elSize,elSize);
   }
 
   void calculate(float xA, float yA) {
@@ -31,8 +34,19 @@ public class Particle {
   }
 
   void gravity() {
-    speed.y += .00005;
-    speed.x += .00001;
+    speed.y += .000000005;
+    speed.x += .000000001;
     position.add(speed);
+  }
+  
+  public void live(){
+    lifeTime--;
+  }
+  
+  public boolean isAlive(){
+    if (lifeTime > 0){
+      return true;
+    }
+    return false;
   }
 }
